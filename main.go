@@ -17,22 +17,22 @@ func main() {
 	db.DB.AutoMigrate(models.Task{})
 	db.DB.AutoMigrate(models.User{})
 
-	r := mux.NewRouter()
+	router := mux.NewRouter()
 
-	r.HandleFunc("/", routes.HomeHandler)
+	router.HandleFunc("/", routes.HomeHandler)
 
 	//TODO: USERS ROUTES
-	r.HandleFunc("/users", routes.GetUsersHandler).Methods("GET")
-	r.HandleFunc("/users/{id}", routes.GetUserHandler).Methods("GET")
-	r.HandleFunc("/users", routes.PostUsersHandler).Methods("POST")
-	r.HandleFunc("/users/{id}", routes.DeleteUsersHandler).Methods("DELETE")
+	router.HandleFunc("/users", routes.GetUsersHandler).Methods("GET")
+	router.HandleFunc("/users/{id}", routes.GetUserHandler).Methods("GET")
+	router.HandleFunc("/users", routes.PostUsersHandler).Methods("POST")
+	router.HandleFunc("/users/{id}", routes.DeleteUsersHandler).Methods("DELETE")
 
 	//TODO: TASKS ROUTES
-	r.HandleFunc("/tasks", routes.GetTasksHandler).Methods("GET")
-	r.HandleFunc("/tasks/{id}", routes.GetTaskHandler).Methods("GET")
-	r.HandleFunc("/tasks", routes.CreateTaskHandler).Methods("POST")
-	r.HandleFunc("/tasks/{id}", routes.DeleteTaskHandler).Methods("DELETE")
+	router.HandleFunc("/tasks", routes.GetTasksHandler).Methods("GET")
+	router.HandleFunc("/tasks/{id}", routes.GetTaskHandler).Methods("GET")
+	router.HandleFunc("/tasks", routes.CreateTaskHandler).Methods("POST")
+	router.HandleFunc("/tasks/{id}", routes.DeleteTaskHandler).Methods("DELETE")
 
-	http.ListenAndServe(":3000", r)
+	http.ListenAndServe(":3000", router)
 	log.Println("Server run in http://localhost:3000")
 }
