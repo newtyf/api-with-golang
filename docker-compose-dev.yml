@@ -1,0 +1,31 @@
+version: "3.9"
+services:
+  goapi:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: goapi
+    ports:
+      - "5000:3000"
+    restart: always
+    links:
+      - postgresgo
+    volumes:
+      - .:/usr/src/app
+  postgresgo:
+    image: postgres
+    container_name: postgresgo
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=mysecretpassword
+      - POSTGRES_USER=newt
+      - POSTGRES_DB=gorm
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      # mongo -> /data/db
+      # mysql -> /var/lib/mysql
+
+volumes:
+  postgres-data:
