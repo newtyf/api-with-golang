@@ -7,11 +7,10 @@ services:
     container_name: goapi
     ports:
       - "5000:3000"
-    restart: always
     links:
       - postgresgo
     volumes:
-      - .:/usr/src/app
+      - ./:/usr/src/app
   postgresgo:
     image: postgres
     container_name: postgresgo
